@@ -1,7 +1,7 @@
 const numbers = document.querySelectorAll(".number");
 const basicOperators= document.querySelectorAll(".basicOperators");
-const equal = document.querySelector(".equal")
-const clear = document.querySelector(".clear")
+const equal = document.querySelector(".equal");
+const clear = document.querySelector(".clear");
 const screen = document.querySelector("#screen");
 
 const mp= document.querySelector(".mp");
@@ -9,18 +9,22 @@ const mr= document.querySelector(".mr");
 const mc= document.querySelector(".mc");
 const mm= document.querySelector(".mm");
 
-let baseMemory=""
+let baseMemory="";
 let memory="";
 let first=0;
 let operator="";
-
+let equalCheck=0;
 
 function show(num) {
   if (screen.value=="0") {
-    screen.value=num
-  } else {
+    screen.value=num;
+  }else if (equalCheck==1){
+    screen.value=num;
+    first=0;
+  } else{
     screen.value+=num;
   }
+  console.log(equalCheck);
 }
 
 function square() {
@@ -37,54 +41,63 @@ function del(){
   screen.value=screen.value.slice(0,-1);
 }
 
+function doEqual(){
+  if (equalCheck==0){
+    if (first==0) {
+      first=parseFloat(screen.value);
+    } else{
+      switch (operator) {
+      case "+":
+        first+=parseFloat(screen.value);
+        break;
+      case "-":
+        first=first - parseFloat(screen.value);
+        break;
+      case "/":
+          first/=parseFloat(screen.value);
+          
+        break;
+      case "*":
+        first*=parseFloat(screen.value);
+        break;
+      default:
+        break;
+    }
+    operator="";
+  }
+  
+}
+  screen.value=0;
+}
 
 function eventListeners() {
   numbers.forEach(num => {
     num.addEventListener("click", () => {
       show(num.dataset.num);
+      equalCheck=0;
     });
   });
 
   basicOperators.forEach(op=>{
     op.addEventListener("click",()=>{
-      first=parseFloat(screen.value);
-      console.log(op.dataset.num);
-      operator=op.dataset.num;
-      screen.value=0;
+        operator=op.dataset.num;
+        doEqual();
   })})
 
-  // plus.addEventListener("click",() => {
-  //   first=parseInt(screen.value);
-  //   operator="+";
-  //   screen.value="";
-  // });
-
-
-
-  equal.addEventListener("click", ()=>{
-    switch (operator) {
-      case "+":
-        console.log(screen.value)
-        screen.value=first+parseFloat(screen.value);
-        break;
-      case "-":
-        screen.value=first-parseFloat(screen.value);
-        break;
-      case "/":
-        screen.value=first/parseFloat(screen.value);
-        break;
-      case "*":
-        screen.value=first*parseFloat(screen.value);
-        break;
-      default:
-        break;
+  equal.addEventListener("click", ()=> {
+    if (equalCheck==0) {
+      doEqual();
     }
+    screen.value=first;
+    equalCheck=1;
+    operator=""
   });
 
 
 
 
   clear.addEventListener("click", ()=>{
+    first=0;
     screen.value=0;
   });
 
@@ -99,11 +112,11 @@ function eventListeners() {
   })
   mm.addEventListener("click",()=>{
       memory-=baseMemory;
-    
+
   })
   mr.addEventListener("click",()=>{
     if (memory=="") {
-      console.log("memory empty")
+      alert("memory empty");
     }else{
       screen.value=memory;
     }
