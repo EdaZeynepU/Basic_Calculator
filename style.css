@@ -1,0 +1,103 @@
+*{
+    font-size: x-large;
+}
+
+body{
+    background: #c1c0be;
+}
+
+#calculator {
+    background: rgb(51, 51, 51);
+    width: 600px;
+    height: 500px;
+    margin: auto;
+    margin-top: 40px;
+    border: solid 0.5px;
+    border-radius: 10px;
+    box-shadow: 40px 22px 10px rgb(121, 117, 117);
+}
+
+.full{
+    display: flex;
+    justify-items: center;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+#screen{
+    margin: 5px;
+    height: 70px;
+    width: 96%;
+    text-align: end;
+    padding: 15px;
+    font-size: xx-large;
+    background: rgb(51, 51, 51);
+    color: #fff4e9;
+}
+
+.top{
+    display: flex;
+    justify-content: center;
+    flex-direction:row-reverse;
+}
+
+.top-operations{
+    display: flex;
+}
+
+.equal{
+    background: #c7c7c7;
+}
+
+.numbers{
+    justify-content: center;
+    width: 200px;
+}
+
+.number{
+    background: #6f6f6f;
+}
+
+.bottom{
+display: flex;
+justify-content: center;
+}
+
+.my-btn{
+    display: flex;
+    height:75px;
+    width: 100px;
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.keys{
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 800px){
+    #calculator{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+    .my-btn{
+        width: 17vw;
+        height: 15vh;
+        max-height: 14vh;
+        min-height: 50px;
+    }
+    .top{
+        margin: 0;
+    }
+    .col{
+        margin: 0 !important;
+    }
+}
