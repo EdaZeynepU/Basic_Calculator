@@ -21,10 +21,10 @@ function show(num) {
   }else if (equalCheck==1){
     screen.value=num;
     first=0;
+    equalCheck=0;
   } else{
     screen.value+=num;
   }
-  console.log(equalCheck);
 }
 
 function square() {
@@ -55,7 +55,6 @@ function doEqual(){
         break;
       case "/":
           first/=parseFloat(screen.value);
-          
         break;
       case "*":
         first*=parseFloat(screen.value);
@@ -63,9 +62,7 @@ function doEqual(){
       default:
         break;
     }
-    operator="";
   }
-  
 }
   screen.value=0;
 }
@@ -80,21 +77,16 @@ function eventListeners() {
 
   basicOperators.forEach(op=>{
     op.addEventListener("click",()=>{
-        operator=op.dataset.num;
         doEqual();
+        operator=op.dataset.num;
   })})
 
   equal.addEventListener("click", ()=> {
-    if (equalCheck==0) {
-      doEqual();
-    }
+    doEqual();
     screen.value=first;
     equalCheck=1;
     operator=""
   });
-
-
-
 
   clear.addEventListener("click", ()=>{
     first=0;
